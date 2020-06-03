@@ -13,7 +13,6 @@ import json
 
 from uuid import getnode as get_mac
 
-import six
 import gpsoauth
 import requests
 
@@ -821,7 +820,7 @@ class Keep(object):
         return (node for node in self.all() if
             # Process the query.
             (query is None or (
-                (isinstance(query, six.string_types) and (query in node.title or query in node.text)) or
+                (isinstance(query, str) and (query in node.title or query in node.text)) or
                 (isinstance(query, Pattern) and (
                     query.search(node.title) or query.search(node.text)
                 ))
@@ -911,7 +910,7 @@ class Keep(object):
         Returns:
             Union[gkeepapi.node.Label, None]: The label.
         """
-        is_str = isinstance(query, six.string_types)
+        is_str = isinstance(query, str)
         name = None
         if is_str:
             name = query
